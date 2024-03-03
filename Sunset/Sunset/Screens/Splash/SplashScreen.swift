@@ -10,6 +10,8 @@ import SwiftUI
 struct SplashScreen: View {
     @Environment(SunsetAppViewModel.self) var viewModel
     @State private var scale = 1.0
+
+    //TODO: Create Splash screen
     var body: some View {
         Text("Hello, Splash!")
             .scaleEffect(scale)
