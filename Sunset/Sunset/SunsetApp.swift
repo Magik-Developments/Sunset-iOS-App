@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct SunsetApp: App {
+
+    @State var viewModel = SunsetAppViewModel()
+
+    @State var lastState: AppState = .splash
+    @State var networkStatus = NetworkStatus()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SunsetAppStateView()
+                .environment(viewModel)
         }
     }
 }

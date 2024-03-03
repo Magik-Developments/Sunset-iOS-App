@@ -8,28 +8,18 @@
 import SwiftUI
 
 struct DSButton: View {
-    var title: String
+    var title: String.LocalizationValue
     var buttonStyle: SunsetStyle
-    var icon: ImageResource?
     var size: ButtonSize
     var action: () -> Void
 
     var body: some View {
         Button(action: action) {
             HStack(alignment: .center, spacing: 8, content: {
-                if let icon {
-                    Image(icon)
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundStyle(buttonStyle.FontColor)
-                        .frame(width: 30, height: 30)
-                }
-                Text(title)
+                Text(String(localized: title))
                     .sunsetFontPrimary(primaryFont: .primaryBold, primarySize: .headlineS)
                     .foregroundStyle(buttonStyle.FontColor)
                     .textCase(.uppercase)
-
-
             })
             .frame(width: size.rawValue, height: 50)
         }
@@ -75,14 +65,14 @@ struct SunsetButtonStyles {
 
         VStack {
             Spacer()
-            DSButton(title: "Press", buttonStyle: SunsetButtonStyles.primaryDefault, icon: .google, size: .large) {
+            DSButton(title: "Press", buttonStyle: SunsetButtonStyles.primaryDefault, size: .large) {
                 print("First button")
             }
 
             DSButton(title: "Press", buttonStyle: SunsetButtonStyles.secondaryWhite, size: .medium) {
                 print("Second button")
             }
-            DSButton(title: "Press", buttonStyle: SunsetButtonStyles.secondaryDark, icon: .facebookIcon ,size: .medium) {
+            DSButton(title: "Press", buttonStyle: SunsetButtonStyles.secondaryDark ,size: .medium) {
                 print("Third button")
             }
         }
