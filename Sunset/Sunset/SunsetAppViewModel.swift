@@ -13,6 +13,8 @@ final class SunsetAppViewModel {
     var appState: AppState = .splash
 
     func isUserLoggedIn() {
-        appState = .welcome
+        withAnimation(.smooth) {
+            appState = .welcome
+        }
     }
 }
