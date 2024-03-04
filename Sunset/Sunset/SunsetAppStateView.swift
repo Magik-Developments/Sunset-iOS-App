@@ -18,7 +18,9 @@ struct SunsetAppStateView: View {
         Group {
             switch viewModel.appState {
             case .splash: SplashScreen()
-            case .welcome: WelcomeView()
+            case .welcome: 
+                WelcomeView()
+                    .environmentObject(WelcomeViewModel())
             }
         }
     }

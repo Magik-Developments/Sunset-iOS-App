@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    @EnvironmentObject var viewModel: WelcomeViewModel
+
     var body: some View {
         ZStack {
             WelcomeBackgroundView()
@@ -23,7 +25,7 @@ struct WelcomeView: View {
 
                 Spacer()
 
-                WelcomeButtonsView()
+                WelcomeButtonsView(isMailSheetPresented: $viewModel.isMailSheetPresented)
                     .padding(.bottom, 48)
 
                 DSButton(title: "access.guest", buttonStyle: SunsetButtonStyles.secondaryWhite, size: .large) {
@@ -32,6 +34,12 @@ struct WelcomeView: View {
 
             }
         }
+        .sheet(isPresented: $viewModel.isMailSheetPresented, content: {
+            //TODO: Add access form login and also button to switch to signup.
+            Text("Hello sheet")
+                .presentationDetents([.fraction(0.6)])
+                .presentationCornerRadius(75)
+        })
     }
 }
 
@@ -58,10 +66,14 @@ struct WelcomeHeaderTitlesView: View {
 
         Text(String(localized: "access.welcome.message"))
             .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyL)
+            .multilineTextAlignment(.center)
+            .padding(.top, 8)
     }
 }
 
 struct WelcomeButtonsView : View {
+    @Binding var isMailSheetPresented: Bool
+
     var body: some View {
         VStack {
             Text(String(localized: "access.title"))
@@ -71,15 +83,13 @@ struct WelcomeButtonsView : View {
                 DSIconButton(backgroundIconColor: .primaryBackgroundLogin,
                              imageResource: .envelopeFill,
                              imageColor: .neutralBackgroundDefault) {
-                    //TODO: Login Mail Flow
+                    isMailSheetPresented = true
                 }
-//                Spacer()
                 DSIconButton(backgroundIconColor: .primaryBackgroundLogin,
                              imageResource: .googleIcon,
                              imageColor: .neutralBackgroundDefault) {
                     //TODO: Login Google
                 }
-//                Spacer()
                 DSIconButton(backgroundIconColor: .primaryBackgroundLogin,
                              imageResource: .appleLogo,
                              imageColor: .neutralBackgroundDefault) {
@@ -89,9 +99,7 @@ struct WelcomeButtonsView : View {
             }
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity)
-
         }
-
     }
 }
 
