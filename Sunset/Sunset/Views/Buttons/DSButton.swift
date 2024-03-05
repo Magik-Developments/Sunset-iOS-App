@@ -21,7 +21,7 @@ struct DSButton: View {
                     .foregroundStyle(buttonStyle.FontColor)
                     .textCase(.uppercase)
             })
-            .frame(width: size.rawValue, height: 50)
+            .frame(width: size.rawValue, height: 40)
         }
         .tint(buttonStyle.BackGroundColor)
         .buttonStyle(.borderedProminent)
