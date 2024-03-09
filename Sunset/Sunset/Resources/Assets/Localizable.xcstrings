@@ -323,6 +323,7 @@
       }
     },
     "Hello, Splash!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
