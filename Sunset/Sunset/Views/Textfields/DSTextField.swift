@@ -22,21 +22,15 @@ struct DSTextField: View {
             .overlay {
                 if !isSecure {
                     TextField(String(localized:textFieldTitle), text: $valueTextField)
-                        .textFieldStyle(.plain)
-                        .foregroundStyle(.neutralTextBody)
-                        .font(secondaryTextFieldFont(secondaryFont: .secondaryRegular, size: 18))
-                        .padding(16)
-                        .textInputAutocapitalization(.never)
+                        .sunsetStyles()
                         .focused($isTextFieldFocused)
+
                 } else {
                     SecureField(String(localized:textFieldTitle), text: $valueTextField)
-                        .textFieldStyle(.plain)
-                        .foregroundStyle(.neutralTextBody)
-                        .font(secondaryTextFieldFont(secondaryFont: .secondaryRegular, size: 18))
-                        .padding(16)
-                        .textInputAutocapitalization(.never)
+                        .sunsetStyles()
                         .focused($isTextFieldFocused)
                 }
             }
     }
 }
+

@@ -36,10 +36,6 @@ struct WelcomeLoginFormView: View {
     }
 }
 
-func secondaryTextFieldFont(secondaryFont: SunsetFontsSecondary, size: CGFloat) -> Font {
-    Font.custom(secondaryFont.rawValue, size: size)
-}
-
 #Preview {
     WelcomeLoginFormView()
 }
