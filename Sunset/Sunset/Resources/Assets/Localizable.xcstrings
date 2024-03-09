@@ -185,6 +185,29 @@
         }
       }
     },
+    "common.conditions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A Sunset valorem la teva privadesa, de manera que en fer clic a Registra't acceptes els nostres termes. Si us plau, llegiu com tractem les vostres dades a la nostra política de privadesa i política de cookies."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Sunset we value your privacy, so by clicking Sign Up you agree with our terms. Please, read how we process your data in our privacy policy and cookies Policy."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "En sunset valoramos tu privacidad, por lo que clicando en Regístrate, usted acepta nuestros términos. Por favor, lea cómo procesamos los datos en nuestra política de privacidad y política de cookies. "
+          }
+        }
+      }
+    },
     "common.email" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -277,12 +300,40 @@
         }
       }
     },
+    "common.username" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuari"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Username"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuario"
+          }
+        }
+      }
+    },
     "Hello, Splash!" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Hello, Splash!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
           }
         }
       }
