@@ -214,7 +214,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Login"
+            "value" : "Accedeix"
           }
         },
         "en" : {
@@ -226,7 +226,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Login"
+            "value" : "Accede"
           }
         }
       }
@@ -254,6 +254,29 @@
         }
       }
     },
+    "common.signup" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registra't"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Up"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regístrate"
+          }
+        }
+      }
+    },
     "Hello, Splash!" : {
       "localizations" : {
         "en" : {
@@ -270,6 +293,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Press"
+          }
+        }
+      }
+    },
+    "signup.invite" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Encara no estas registrat? Prem en el següent botó i ..."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not signed up yet? Push on the following button and ..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Todavía no estás registrado? Pulsa en el siguiente botón y ..."
           }
         }
       }
