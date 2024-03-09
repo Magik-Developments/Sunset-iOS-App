@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    @EnvironmentObject var viewModel: WelcomeViewModel
+
     var body: some View {
         ZStack {
             WelcomeBackgroundView()
@@ -23,7 +25,7 @@ struct WelcomeView: View {
 
                 Spacer()
 
-                WelcomeButtonsView()
+                WelcomeButtonsView(isMailSheetPresented: $viewModel.isMailSheetPresented)
                     .padding(.bottom, 48)
 
                 DSButton(title: "access.guest", buttonStyle: SunsetButtonStyles.secondaryWhite, size: .large) {
@@ -32,68 +34,15 @@ struct WelcomeView: View {
 
             }
         }
+        .sheet(isPresented: $viewModel.isMailSheetPresented, content: {
+            //TODO: Add access form login and also button to switch to signup.
+            WelcomeLoginFormView()
+                .presentationDetents([.fraction(0.6)])
+                .presentationCornerRadius(75)
+        })
     }
 }
 
-struct WelcomeBackgroundView: View {
-    var body: some View {
-        LinearGradient(colors: [Color(.primaryBackgroundLogin), Color(.neutralBackgroundDefault)],
-                       startPoint: .bottomLeading,
-                       endPoint: .topTrailing)
-        .ignoresSafeArea()
-        .opacity(0.3)
-    }
-}
-
-struct WelcomeHeaderTitlesView: View {
-    var body: some View {
-        Text(String(localized: "access.hello"))
-            .sunsetFontPrimary(primaryFont: .primaryBold, primarySize: .displayM)
-            .foregroundStyle(.neutralTextTitle)
-            .multilineTextAlignment(.leading)
-
-        Text(String(localized: "access.welcome.title"))
-            .sunsetFontPrimary(primaryFont: .primaryBold, primarySize: .displayM)
-            .foregroundStyle(.neutralTextTitle)
-
-        Text(String(localized: "access.welcome.message"))
-            .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyL)
-    }
-}
-
-struct WelcomeButtonsView : View {
-    var body: some View {
-        VStack {
-            Text(String(localized: "access.title"))
-                .sunsetFontPrimary(primaryFont: .primaryMedium, primarySize: .headlineM)
-
-            HStack {
-                DSIconButton(backgroundIconColor: .primaryBackgroundLogin,
-                             imageResource: .envelopeFill,
-                             imageColor: .neutralBackgroundDefault) {
-                    //TODO: Login Mail Flow
-                }
-//                Spacer()
-                DSIconButton(backgroundIconColor: .primaryBackgroundLogin,
-                             imageResource: .googleIcon,
-                             imageColor: .neutralBackgroundDefault) {
-                    //TODO: Login Google
-                }
-//                Spacer()
-                DSIconButton(backgroundIconColor: .primaryBackgroundLogin,
-                             imageResource: .appleLogo,
-                             imageColor: .neutralBackgroundDefault) {
-                    //TODO: Login SSO Apple id.
-
-                }
-            }
-            .padding(.horizontal, 16)
-            .frame(maxWidth: .infinity)
-
-        }
-
-    }
-}
 
 #Preview {
     WelcomeView()
