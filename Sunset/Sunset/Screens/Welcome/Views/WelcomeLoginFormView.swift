@@ -18,15 +18,7 @@ struct WelcomeLoginFormView: View {
             SunsetWelcomeTextfields()
 
             if !viewModel.isLoginForm {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 32)
-                        .foregroundStyle(viewModel.isToggleOn ? .green : .red)
-                        .opacity(0.2)
-
-                    DSToggle(text: "common.conditions", isOn: $viewModel.isToggleOn)
-                        .padding(16)
-                }
-                .frame(maxWidth: 340, maxHeight: 100)
+                SunsetConditionsToggle()
             }
 
             DSButton(title: viewModel.isLoginForm ? "common.login" : "common.signup",
@@ -52,6 +44,7 @@ func secondaryTextFieldFont(secondaryFont: SunsetFontsSecondary, size: CGFloat) 
     WelcomeLoginFormView()
 }
 
+//MARK: Helper view to simplify organization.
 struct SunsetWelcomeTextfields: View {
     @EnvironmentObject var viewModel: WelcomeViewModel
 
@@ -64,6 +57,22 @@ struct SunsetWelcomeTextfields: View {
         if !viewModel.isLoginForm {
             DSTextField(valueTextField: $viewModel.username, textFieldTitle: "common.username", isSecure: false)
         }
+    }
+}
+
+struct SunsetConditionsToggle: View {
+    @EnvironmentObject var viewModel: WelcomeViewModel
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 32)
+                .foregroundStyle(viewModel.isToggleOn ? .green : .red)
+                .opacity(0.2)
+
+            DSToggle(text: "common.conditions", isOn: $viewModel.isToggleOn)
+                .padding(16)
+        }
+        .frame(maxWidth: 340, maxHeight: 100)
     }
 }
 

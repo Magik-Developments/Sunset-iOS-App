@@ -9,12 +9,12 @@ import SwiftUI
 
 struct DSToggle: View {
 
-    var text: String
+    var text: String.LocalizationValue
     @Binding var isOn: Bool
 
     var body: some View {
         Toggle(isOn: $isOn, label: {
-            Text(text)
+            Text(String(localized:text))
                 .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyS)
         })
         .toggleStyle(SunsetToggleStyle())
