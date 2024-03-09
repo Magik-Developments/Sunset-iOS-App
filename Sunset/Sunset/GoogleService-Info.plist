@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>178221002817-5492nnkpt69m7v7qtb1ain1bt54n6tvt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.178221002817-5492nnkpt69m7v7qtb1ain1bt54n6tvt</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>178221002817-3fqqng9psetb1jap4ksf0rmmtq23a2vt.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC6TbCiZuDLz6AgHqpdg4GhXA38bQgVhLU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>178221002817</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.madteam.ios.Sunset</string>
+	<key>PROJECT_ID</key>
+	<string>sunset-app-maddevs</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sunset-app-maddevs.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:178221002817:ios:e9ec461fab24ce3e1056c0</string>
+	<key>DATABASE_URL</key>
+	<string>https://sunset-app-maddevs-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>
