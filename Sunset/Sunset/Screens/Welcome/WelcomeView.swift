@@ -14,7 +14,7 @@ struct WelcomeView: View {
         ZStack {
             WelcomeBackgroundView()
 
-            VStack {
+            VStack(alignment: .center) {
                 Image(.sun)
                     .resizable()
                     .frame(width: 220, height: 220)

@@ -9,17 +9,17 @@ import SwiftUI
 
 struct SplashScreen: View {
     @Environment(SunsetAppViewModel.self) var viewModel
-    @State private var scale = 1.0
+    @State private var scale = 1.25
     @State var showProgressView: Bool = false
 
     //TODO: Create Splash screen
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             Image(.sun)
                 .scaleEffect(scale)
                 .onAppear {
                     withAnimation(.smooth) {
-                        self.scale = 1.25
+                        self.scale = 1.1
                     }
                 }
                 .task {
