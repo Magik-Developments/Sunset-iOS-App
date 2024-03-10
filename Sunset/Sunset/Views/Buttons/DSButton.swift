@@ -27,6 +27,7 @@ struct DSButton: View {
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.capsule)
         .clipShape(.capsule)
+        .shadow(color: .gray, radius: 4)
     }
 }
 

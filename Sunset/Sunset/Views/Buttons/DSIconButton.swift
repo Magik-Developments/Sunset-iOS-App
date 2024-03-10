@@ -31,6 +31,7 @@ struct DSIconButton: View {
             }
             .frame(width: 80, height: 80)
         })
+        .shadow(color: .gray, radius: 4)
     }
 }
 
