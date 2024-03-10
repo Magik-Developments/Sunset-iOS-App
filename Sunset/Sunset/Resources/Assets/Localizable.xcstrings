@@ -607,6 +607,29 @@
         }
       }
     },
+    "toast.user.created" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuari creat"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "User created"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuario creado"
+          }
+        }
+      }
+    },
     "username.validation.desc" : {
       "extractionState" : "manual",
       "localizations" : {

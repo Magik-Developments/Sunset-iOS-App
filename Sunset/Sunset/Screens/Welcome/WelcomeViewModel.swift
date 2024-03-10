@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 import SimpleToast
+import FirebaseStorage
 
 @MainActor
 final class WelcomeViewModel: ObservableObject {
@@ -31,6 +32,7 @@ final class WelcomeViewModel: ObservableObject {
     //MARK: Toast
     @Published var isToggleToastPresented: Bool = false
     @Published var isFieldsToastPresented: Bool = false
+    @Published var isUserCreatedToastPresented: Bool = false
     var toastOptions = SimpleToastOptions(
         alignment: .bottom,
         hideAfter: 4
@@ -53,7 +55,7 @@ final class WelcomeViewModel: ObservableObject {
         }
     }
 
-    //MARK: Sign up via email
+    //MARK: Sign up via email - Create user
     func areSignUpFieldsValid() -> Bool {
         guard let isEmailValid, let isPasswordValid, let isUsernameValid else { return false }
         return isEmailValid && isPasswordValid && isUsernameValid
@@ -78,10 +80,11 @@ final class WelcomeViewModel: ObservableObject {
 
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(username.lowercased())
+        let imageURL = try await getDefaultImageURL()
         let userData: [String: String] = [
             "creation_date": dateString,
             "email": email,
-            "image": "", //TODO: Get default image from Firebase Storage and put the URL in here.
+            "image": imageURL,
             "provider": "firebase",
             "username": username
         ]
@@ -89,8 +92,26 @@ final class WelcomeViewModel: ObservableObject {
         try await userRef.setData(userData)
     }
 
+
+    fileprivate func getFilePathForDefaultImage() -> String {
+        "profile_images/default_images/\(String(describing: username.first!.lowercased())).png"
+    }
+
+    fileprivate func getDefaultImageURL() async throws -> String {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let fileRef = storageRef.child(getFilePathForDefaultImage())
+
+        do {
+            let url = try await fileRef.downloadURL()
+            return url.absoluteString
+        } catch {
+            throw error
+        }
+    }
+
     //MARK: Toast
-    func isToggleOnToastLabel() -> some View{
+    func isToggleOnToastLabel() -> some View {
         Label("toast.toggle.on", systemImage: "xmark.octagon")
             .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
             .padding()
@@ -100,11 +121,21 @@ final class WelcomeViewModel: ObservableObject {
             .padding(.top)
     }
 
-    func areFieldsValidLabel() -> some View{
+    func areFieldsValidLabel() -> some View {
         Label("toast.fields.valid", systemImage: "xmark.octagon")
             .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
             .padding()
             .background(.red)
+            .foregroundStyle(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 32))
+            .padding(.top)
+    }
+
+    func successUserCreatedLabel() -> some View {
+        Label("toast.user.created", systemImage: "person.badge.shield.checkmark.fill")
+            .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
+            .padding()
+            .background(.green)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: 32))
             .padding(.top)

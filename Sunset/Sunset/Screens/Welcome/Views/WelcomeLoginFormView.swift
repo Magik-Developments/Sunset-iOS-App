@@ -37,6 +37,7 @@ struct WelcomeLoginFormView: View {
                                     let authResult = try await viewModel.createUser()
                                     guard let authResult else { return }
                                     //TODO: Navigate to email validation / landing.
+                                    viewModel.isUserCreatedToastPresented = true
                                     appViewModel.user = authResult.user
                                 }
                             } else {
@@ -77,6 +78,9 @@ struct WelcomeLoginFormView: View {
         }
         .simpleToast(isPresented: $viewModel.isFieldsToastPresented, options: viewModel.toastOptions) {
             viewModel.areFieldsValidLabel()
+        }
+        .simpleToast(isPresented: $viewModel.isUserCreatedToastPresented, options: viewModel.toastOptions) {
+            viewModel.successUserCreatedLabel()
         }
     }
 }
