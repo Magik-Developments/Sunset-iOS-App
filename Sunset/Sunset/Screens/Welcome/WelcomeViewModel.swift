@@ -135,7 +135,7 @@ final class WelcomeViewModel: ObservableObject {
         Label("toast.user.created", systemImage: "person.badge.shield.checkmark.fill")
             .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
             .padding()
-            .background(.green)
+            .background(.successBackgroundDefault)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: 32))
             .padding(.top)
