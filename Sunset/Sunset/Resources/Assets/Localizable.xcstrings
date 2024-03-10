@@ -429,6 +429,50 @@
         }
       }
     },
+    "error.title" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
+    },
+    "firebase.error.common" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hi ha hagut un error de comunicació siusplau intenteu-ho mes tard."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There was a communication error, please try it in a few minutes. "
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ha habido un error de comunicación, por favor, pruébelo más tarde. "
+          }
+        }
+      }
+    },
     "password.validation.desc" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -515,6 +559,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Todavía no estás registrado? Pulsa en el siguiente botón y ..."
+          }
+        }
+      }
+    },
+    "toast.fields.valid" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siusplau introdueix les dades obligatòries "
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please fill all entry fields correctly"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, introduce los campos correctamente"
+          }
+        }
+      }
+    },
+    "toast.toggle.on" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siusplau accepta les condicions"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please accept conditions"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por favor, acepta las condiciones"
           }
         }
       }

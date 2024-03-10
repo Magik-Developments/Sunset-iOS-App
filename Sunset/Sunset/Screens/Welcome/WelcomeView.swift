@@ -35,7 +35,6 @@ struct WelcomeView: View {
             }
         }
         .sheet(isPresented: $viewModel.isMailSheetPresented, content: {
-            //TODO: Add access form login and also button to switch to signup.
             WelcomeLoginFormView()
                 .presentationDetents([.fraction(0.6)])
                 .presentationCornerRadius(75)

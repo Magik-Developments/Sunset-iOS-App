@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SimpleToast
 
 struct WelcomeLoginFormView: View {
     @EnvironmentObject var viewModel: WelcomeViewModel
+    @Environment(SunsetAppViewModel.self) var appViewModel
 
     var body: some View {
         ScrollView(.vertical) {
@@ -25,10 +27,28 @@ struct WelcomeLoginFormView: View {
                 DSButton(title: viewModel.isLoginForm ? "common.login" : "common.signup",
                          buttonStyle: SunsetButtonStyles.primaryDefault ,
                          size: .large) {
-                    //TODO: Validate fields. and do Login / signup depending.
+
+                    if viewModel.isLoginForm {
+                        //TODO: Validate email and password. and do login.
+                    } else {
+                        if viewModel.areSignUpFieldsValid() {
+                            if viewModel.isToggleOn {
+                                Task {
+                                    let authResult = try await viewModel.createUser()
+                                    guard let authResult else { return }
+                                    //TODO: Navigate to email validation / landing.
+                                    appViewModel.user = authResult.user
+                                }
+                            } else {
+                                viewModel.isToggleToastPresented = true
+                            }
+                        } else {
+                            viewModel.isFieldsToastPresented = true
+                        }
+                    }
                 }
                          .padding(.top, 16)
-                //Go back button only shown in signup
+
                 if !viewModel.isLoginForm {
                     DSButton(title: "common.go.back", buttonStyle: SunsetButtonStyles.secondaryDark, size: .medium) {
                         withAnimation {
@@ -46,6 +66,18 @@ struct WelcomeLoginFormView: View {
         }
         .padding(.top, 16)
         .scrollIndicators(.automatic)
+        .alert(viewModel.alertItem?.title ?? Text(""),
+               isPresented: $viewModel.firebaseErrorAlertIsPresented) {
+            //NO ACTIONS NEEDED
+        } message: {
+            viewModel.alertItem?.message
+        }
+        .simpleToast(isPresented: $viewModel.isToggleToastPresented, options: viewModel.toastOptions) {
+            viewModel.isToggleOnToastLabel()
+        }
+        .simpleToast(isPresented: $viewModel.isFieldsToastPresented, options: viewModel.toastOptions) {
+            viewModel.areFieldsValidLabel()
+        }
     }
 }
 

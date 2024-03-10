@@ -12,7 +12,6 @@ struct SplashScreen: View {
     @State private var scale = 1.25
     @State var showProgressView: Bool = false
 
-    //TODO: Create Splash screen
     var body: some View {
         VStack(alignment: .center) {
             Image(.sun)

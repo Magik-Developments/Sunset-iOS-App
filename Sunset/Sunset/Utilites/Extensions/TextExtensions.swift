@@ -20,3 +20,17 @@ extension Text {
             .font(.custom(secondaryFont.rawValue, size: secondarySize.rawValue))
     }
 }
+
+extension Label {
+    func sunsetFontPrimary(primaryFont: SunsetFontsPrimary,
+                           primarySize: SunsetFontSizePrimary) -> some View {
+        self
+            .font(.custom(primaryFont.rawValue, size: primarySize.rawValue))
+    }
+
+    func sunsetFontSecondary(secondaryFont: SunsetFontsSecondary,
+                             secondarySize: SunsetFontSizeSecondary) -> some View {
+        self
+            .font(.custom(secondaryFont.rawValue, size: secondarySize.rawValue))
+    }
+}
