@@ -47,17 +47,20 @@ struct SunsetWelcomeTextfields: View {
     var body: some View {
 
         DSTextField(valueTextField: $viewModel.email, 
+                    isFieldValid: $viewModel.isEmailValid,
                     validator: .email,
                     textFieldTitle: "common.email",
                     isSecure: false)
 
         DSTextField(valueTextField: $viewModel.password, 
+                    isFieldValid: $viewModel.isPasswordValid,
                     validator: .password,
                     textFieldTitle: "common.password",
                     isSecure: true)
 
         if !viewModel.isLoginForm {
             DSTextField(valueTextField: $viewModel.username, 
+                        isFieldValid: $viewModel.isUsernameValid,
                         validator: .username,
                         textFieldTitle: "common.username",
                         isSecure: false)

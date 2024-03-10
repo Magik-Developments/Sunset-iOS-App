@@ -11,7 +11,7 @@ struct DSTextField: View {
     @EnvironmentObject var viewModel: WelcomeViewModel
     @FocusState var isTextFieldFocused: Bool
     @Binding var valueTextField: String
-    @State var isFieldValid: Bool? = nil
+    @Binding var isFieldValid: Bool?
     var validator: SunsetTextFieldValidator
     var textFieldTitle: String.LocalizationValue
     var isSecure: Bool
@@ -58,14 +58,27 @@ struct DSTextField: View {
                             .focused($isTextFieldFocused)
                     }
                     if let isFieldValid {
+                        if !isFieldValid {
+                            Image(systemName: "info.circle.fill")
+                                .foregroundStyle(.blue)
+                                .onTapGesture {
+                                    viewModel.populateAlertItemTextfield(validator: validator)
+                                    viewModel.textFieldInfoAlertIsPresented = true
+                                }
+                        }
                         Image(systemName: isFieldValid ? "checkmark.circle" : "xmark.circle")
                             .padding(.trailing, 16)
                             .foregroundStyle(isFieldValid ? .green : .red)
-                            .onTapGesture {
-                                //TODO: Present alert with information. when the field is not valid. for ewach type of check every validation.
-                            }
+                            .shadow(radius: 1)
                     }
                 }
+                .alert(viewModel.alertItem?.title ?? Text(""),
+                       isPresented: $viewModel.textFieldInfoAlertIsPresented) {
+                    //NO ACTIONS NEEDED
+                } message: {
+                    viewModel.alertItem?.message
+                }
+
             }
     }
 }

@@ -1,6 +1,22 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
     "access.apple" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -185,6 +201,29 @@
         }
       }
     },
+    "common.alert.gotit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entès!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got it! "
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Entendido!"
+          }
+        }
+      }
+    },
     "common.conditions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -202,7 +241,7 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "En sunset valoramos tu privacidad, por lo que clicando en Regístrate, usted acepta nuestros términos. Por favor, lea cómo procesamos los datos en nuestra política de privacidad y política de cookies. "
           }
         }
@@ -322,13 +361,110 @@
         }
       }
     },
-    "Hello, Splash!" : {
-      "extractionState" : "stale",
+    "email.validation.desc" : {
+      "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'email ha de seguir el format estàndard d'un email.  "
+          }
+        },
         "en" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hello, Splash!"
+            "state" : "translated",
+            "value" : "The email must fit the standard email format. "
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El email tiene que encajar con el formato estándar de un email. "
+          }
+        }
+      }
+    },
+    "email.validation.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Validació email"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email validation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Validación email"
+          }
+        }
+      }
+    },
+    "password.validation.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La contraseña ha de ser d'almenys 6 caràcters i ha de tindre una letra majúscula.   "
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The password must be at least 6 characters long and have a capital character. "
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La contraseña tiene que ser de al menos 6 caracteres y ha de contener una letra mayúscula "
+          }
+        }
+      }
+    },
+    "password.validation.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Validació contrasenya "
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password validation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Validación contraseña"
+          }
+        }
+      }
+    },
+    "Press" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Press"
           }
         },
         "es" : {
@@ -339,21 +475,11 @@
         }
       }
     },
-    "Press" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Press"
-          }
-        }
-      }
-    },
     "signup.invite" : {
       "localizations" : {
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Encara no estas registrat? Prem en el següent botó i ..."
           }
         },
@@ -365,8 +491,54 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "¿Todavía no estás registrado? Pulsa en el siguiente botón y ..."
+          }
+        }
+      }
+    },
+    "username.validation.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'usuari ha de ser més llarg de 6 caràcters i no ha de tindre caràcters especials. "
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The username has to be larger than 6 characters and it must not have any special characters."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El usuario tiene que ser más largo de 6 caracteres y no tiene que contener ningún carácter especial. "
+          }
+        }
+      }
+    },
+    "username.validation.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Validació usuari "
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Username validation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Validación usuario"
           }
         }
       }
