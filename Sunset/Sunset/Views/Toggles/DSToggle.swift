@@ -34,10 +34,14 @@ struct SunsetToggleStyle: ToggleStyle {
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 51, height: 31, alignment: .center)
                 .overlay {
-
                         Circle()
                             .foregroundColor(.white)
                             .padding(.all, 3)
+                            .overlay {
+                                Image(systemName:configuration.isOn ? "sun.max.fill" : "moon.zzz.fill")
+                                    .foregroundStyle(configuration.isOn ? .primaryBackgroundLogin : .blue)
+                                    .opacity(0.8)
+                            }
                             .offset(x: configuration.isOn ? 11 : -11, y: 0)
                 }
                 .cornerRadius(20)
@@ -49,4 +53,8 @@ struct SunsetToggleStyle: ToggleStyle {
 
         }
     }
+}
+
+#Preview {
+    DSToggle(text: "common.conditions", isOn: .constant(true))
 }

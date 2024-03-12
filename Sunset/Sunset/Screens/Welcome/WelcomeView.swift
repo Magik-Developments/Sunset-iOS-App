@@ -14,7 +14,7 @@ struct WelcomeView: View {
         ZStack {
             WelcomeBackgroundView()
 
-            VStack {
+            VStack(alignment: .center) {
                 Image(.sun)
                     .resizable()
                     .frame(width: 220, height: 220)
@@ -35,7 +35,6 @@ struct WelcomeView: View {
             }
         }
         .sheet(isPresented: $viewModel.isMailSheetPresented, content: {
-            //TODO: Add access form login and also button to switch to signup.
             WelcomeLoginFormView()
                 .presentationDetents([.fraction(0.6)])
                 .presentationCornerRadius(75)

@@ -6,38 +6,83 @@
 //
 
 import SwiftUI
+import SimpleToast
 
 struct WelcomeLoginFormView: View {
     @EnvironmentObject var viewModel: WelcomeViewModel
+    @Environment(SunsetAppViewModel.self) var appViewModel
 
     var body: some View {
-        VStack {
-            Text(viewModel.isLoginForm ? "common.login" : "common.signup")
-                .sunsetFontPrimary(primaryFont: .primaryBold, primarySize: .headlineL)
+        ScrollView(.vertical) {
+            VStack {
+                Text(viewModel.isLoginForm ? "common.login" : "common.signup")
+                    .sunsetFontPrimary(primaryFont: .primaryBold, primarySize: .headlineL)
 
-            SunsetWelcomeTextfields()
+                SunsetWelcomeTextfields()
 
-            if !viewModel.isLoginForm {
-                SunsetConditionsToggle()
+                if !viewModel.isLoginForm {
+                    SunsetConditionsToggle()
+                }
+
+                DSButton(title: viewModel.isLoginForm ? "common.login" : "common.signup",
+                         buttonStyle: SunsetButtonStyles.primaryDefault ,
+                         size: .large) {
+
+                    if viewModel.isLoginForm {
+                        //TODO: Validate email and password. and do login.
+                    } else {
+                        if viewModel.areSignUpFieldsValid() {
+                            if viewModel.isToggleOn {
+                                Task {
+                                    let authResult = try await viewModel.createUser()
+                                    guard let authResult else { return }
+                                    //TODO: Navigate to email validation / landing.
+                                    viewModel.isUserCreatedToastPresented = true
+                                    appViewModel.user = authResult.user
+                                }
+                            } else {
+                                viewModel.isToggleToastPresented = true
+                            }
+                        } else {
+                            viewModel.isFieldsToastPresented = true
+                        }
+                    }
+                }
+                         .padding(.top, 16)
+
+                if !viewModel.isLoginForm {
+                    DSButton(title: "common.go.back", buttonStyle: SunsetButtonStyles.secondaryDark, size: .medium) {
+                        withAnimation {
+                            viewModel.isLoginForm.toggle()
+                        }
+                    }
+                    .padding(.bottom, 8)
+                }
+
+                if viewModel.isLoginForm {
+                    SunsetSignUpButton()
+                }
             }
-
-            DSButton(title: viewModel.isLoginForm ? "common.login" : "common.signup",
-                     buttonStyle: viewModel.isLoginForm ? SunsetButtonStyles.primaryDefault : SunsetButtonStyles.secondaryDark ,
-                     size: .large) {
-                //TODO: Validate fields.
-            }
-            .padding(.top, 16)
-
-            if viewModel.isLoginForm {
-                SunsetSignUpButton()
-            }
+            .tint(.primaryBackgroundLogin)
         }
-        .tint(.primaryBackgroundLogin)
+        .padding(.top, 16)
+        .scrollIndicators(.automatic)
+        .alert(viewModel.alertItem?.title ?? Text(""),
+               isPresented: $viewModel.firebaseErrorAlertIsPresented) {
+            //NO ACTIONS NEEDED
+        } message: {
+            viewModel.alertItem?.message
+        }
+        .simpleToast(isPresented: $viewModel.isToggleToastPresented, options: viewModel.toastOptions) {
+            viewModel.isToggleOnToastLabel()
+        }
+        .simpleToast(isPresented: $viewModel.isFieldsToastPresented, options: viewModel.toastOptions) {
+            viewModel.areFieldsValidLabel()
+        }
+        .simpleToast(isPresented: $viewModel.isUserCreatedToastPresented, options: viewModel.toastOptions) {
+            viewModel.successUserCreatedLabel()
+        }
     }
-}
-
-func secondaryTextFieldFont(secondaryFont: SunsetFontsSecondary, size: CGFloat) -> Font {
-    Font.custom(secondaryFont.rawValue, size: size)
 }
 
 #Preview {
@@ -50,12 +95,24 @@ struct SunsetWelcomeTextfields: View {
 
     var body: some View {
 
-        DSTextField(valueTextField: $viewModel.email, textFieldTitle: "common.email", isSecure: false)
+        DSTextField(valueTextField: $viewModel.email, 
+                    isFieldValid: $viewModel.isEmailValid,
+                    validator: .email,
+                    textFieldTitle: "common.email",
+                    isSecure: false)
 
-        DSTextField(valueTextField: $viewModel.password, textFieldTitle: "common.password", isSecure: false)
+        DSTextField(valueTextField: $viewModel.password, 
+                    isFieldValid: $viewModel.isPasswordValid,
+                    validator: .password,
+                    textFieldTitle: "common.password",
+                    isSecure: true)
 
         if !viewModel.isLoginForm {
-            DSTextField(valueTextField: $viewModel.username, textFieldTitle: "common.username", isSecure: false)
+            DSTextField(valueTextField: $viewModel.username, 
+                        isFieldValid: $viewModel.isUsernameValid,
+                        validator: .username,
+                        textFieldTitle: "common.username",
+                        isSecure: false)
         }
     }
 }
@@ -87,7 +144,8 @@ struct SunsetSignUpButton: View {
             .multilineTextAlignment(.center)
 
         DSButton(title: "common.signup",
-                 buttonStyle: SunsetButtonStyles.secondaryDark, size: .medium) {
+                 buttonStyle: viewModel.isLoginForm ? SunsetButtonStyles.secondaryDark : SunsetButtonStyles.primaryDefault,
+                 size: .medium) {
             withAnimation {
                 viewModel.isLoginForm.toggle()
             }
