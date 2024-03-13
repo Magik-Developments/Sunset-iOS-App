@@ -13,9 +13,11 @@ import FirebaseStorage
 
 @MainActor
 final class WelcomeViewModel: ObservableObject {
-
-    @Published var isMailSheetPresented: Bool = false
     
+    //MARK: Sheet presentations variables
+    @Published var isMailSheetPresented: Bool = false
+    @Published var isLostYourPasswordSheetPresented: Bool = false
+
     //MARK: Login / Signup form variables
     @Published var isLoginForm: Bool = true
     

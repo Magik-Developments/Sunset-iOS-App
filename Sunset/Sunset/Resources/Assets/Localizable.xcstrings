@@ -473,6 +473,32 @@
         }
       }
     },
+    "Im here to find it" : {
+
+    },
+    "login.forgot.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "T'has oblidat de la contrasenya?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forgot your password?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te has olvidado de la contraseña?"
+          }
+        }
+      }
+    },
     "password.validation.desc" : {
       "extractionState" : "manual",
       "localizations" : {

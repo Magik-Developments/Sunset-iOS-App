@@ -60,6 +60,15 @@ struct WelcomeLoginFormView: View {
                 }
 
                 if viewModel.isLoginForm {
+                    Button {
+                        viewModel.isLostYourPasswordSheetPresented.toggle()
+                    } label: {
+                        Text(String(localized: "login.forgot.password"))
+                            .sunsetFontSecondary(secondaryFont: .secondarySemiBold, secondarySize: .bodyM)
+                            .foregroundStyle(.neutralTextBody)
+                    }
+                    .padding(16)
+
                     SunsetSignUpButton()
                 }
             }
@@ -82,6 +91,9 @@ struct WelcomeLoginFormView: View {
         .simpleToast(isPresented: $viewModel.isUserCreatedToastPresented, options: viewModel.toastOptions) {
             viewModel.successUserCreatedLabel()
         }
+        .sheet(isPresented: $viewModel.isLostYourPasswordSheetPresented, content: {
+            
+        })
     }
 }
 
