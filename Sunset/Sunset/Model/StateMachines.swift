@@ -10,5 +10,6 @@ import Foundation
 enum AppState {
     case splash
     case welcome
-//    case noInternet //TODO: Create no internate case. 
+    case landing
+//    case noInternet //TODO: Create no internate case.
 }

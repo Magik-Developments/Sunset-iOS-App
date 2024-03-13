@@ -519,6 +519,9 @@
         }
       }
     },
+    "Log Out" : {
+
+    },
     "login.forgot.password" : {
       "extractionState" : "manual",
       "localizations" : {

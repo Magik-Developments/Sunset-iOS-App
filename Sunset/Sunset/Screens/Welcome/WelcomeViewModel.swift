@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import SimpleToast
 import FirebaseStorage
+import GoogleSignIn
 
 @MainActor
 final class WelcomeViewModel: ObservableObject {
@@ -111,6 +113,45 @@ final class WelcomeViewModel: ObservableObject {
             return url.absoluteString
         } catch {
             throw error
+        }
+    }
+
+    //MARK: - Google SSO
+    func loginWithGoogle(completion: @escaping (Bool, User?, Error?) -> Void) {
+        var isLoginSuccessful = false
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            completion(isLoginSuccessful, nil, nil)
+            return
+        }
+
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as?
+                                              UIWindowScene)?.windows.first?.rootViewController else {
+            completion(isLoginSuccessful, nil, nil)
+            return
+        }
+
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { [unowned self] result, error in
+            guard error == nil else {
+                // No action needed, user canceling sign-in flow.
+                completion(isLoginSuccessful, nil, error)
+                return
+            }
+
+            guard let user = result?.user, let idToken = user.idToken?.tokenString else {
+                alertItem = AlertContext.customError(title: "error.title", message: "firebase.error.common")
+                completion(isLoginSuccessful, nil, nil)
+                return
+            }
+
+            let authCredential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+
+            Auth.auth().signIn(with: authCredential) { result, error in
+                isLoginSuccessful = error == nil
+                completion(isLoginSuccessful, result?.user, error)
+            }
         }
     }
 
