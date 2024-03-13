@@ -14,11 +14,11 @@ import FirebaseStorage
 @MainActor
 final class WelcomeViewModel: ObservableObject {
     
-    //MARK: Sheet presentations variables
+    //MARK: - Sheet presentations variables
     @Published var isMailSheetPresented: Bool = false
     @Published var isLostYourPasswordSheetPresented: Bool = false
 
-    //MARK: Login / Signup form variables
+    //MARK: - Login / Signup form variables
     @Published var isLoginForm: Bool = true
     
     @Published var email: String = ""
@@ -31,16 +31,18 @@ final class WelcomeViewModel: ObservableObject {
 
     @Published var isToggleOn: Bool = false
     
-    //MARK: Toast
+    //MARK: - Toast 
     @Published var isToggleToastPresented: Bool = false
     @Published var isFieldsToastPresented: Bool = false
     @Published var isUserCreatedToastPresented: Bool = false
+    @Published var isResetPasswordSentToastPresented: Bool = false
+
     var toastOptions = SimpleToastOptions(
         alignment: .bottom,
         hideAfter: 4
     )
 
-    //MARK: Alert variables.
+    //MARK: - Alert variables.
     @Published var alertItem: AlertItem?
     @Published var textFieldInfoAlertIsPresented: Bool = false
     @Published var firebaseErrorAlertIsPresented: Bool = false
@@ -57,7 +59,7 @@ final class WelcomeViewModel: ObservableObject {
         }
     }
 
-    //MARK: Sign up via email - Create user
+    //MARK: - Sign up via email - Create user
     func areSignUpFieldsValid() -> Bool {
         guard let isEmailValid, let isPasswordValid, let isUsernameValid else { return false }
         return isEmailValid && isPasswordValid && isUsernameValid
@@ -112,7 +114,18 @@ final class WelcomeViewModel: ObservableObject {
         }
     }
 
-    //MARK: Toast
+    //MARK: - Forgot your passowrd?
+    func sendLinkLostPassword() async {
+        do {
+            try await Auth.auth().sendPasswordReset(withEmail: email)
+            isResetPasswordSentToastPresented.toggle()
+        } catch {
+            alertItem = AlertContext.customError(title: "error.title", message: "firebase.error.common")
+            firebaseErrorAlertIsPresented = true
+        }
+    }
+
+    //MARK: - Toast -
     func isToggleOnToastLabel() -> some View {
         Label("toast.toggle.on", systemImage: "xmark.octagon")
             .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
@@ -135,6 +148,16 @@ final class WelcomeViewModel: ObservableObject {
 
     func successUserCreatedLabel() -> some View {
         Label("toast.user.created", systemImage: "person.badge.shield.checkmark.fill")
+            .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
+            .padding()
+            .background(.successBackgroundDefault)
+            .foregroundStyle(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 32))
+            .padding(.top)
+    }
+
+    func isEmailResetPasswordSent() -> some View {
+        Label("toast.email.reset.sent", systemImage: "paperplane.fill")
             .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
             .padding()
             .background(.successBackgroundDefault)

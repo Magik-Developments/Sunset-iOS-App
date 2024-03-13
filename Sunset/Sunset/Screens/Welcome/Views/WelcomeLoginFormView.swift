@@ -86,7 +86,7 @@ struct WelcomeLoginFormView: View {
             viewModel.successUserCreatedLabel()
         }
         .sheet(isPresented: $viewModel.isLostYourPasswordSheetPresented, content: {
-
+            LostYourPasswordVIew()
         })
     }
 }

@@ -338,6 +338,29 @@
         }
       }
     },
+    "common.send.link" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envïa Link"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Link"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envía Link"
+          }
+        }
+      }
+    },
     "common.signup" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -473,6 +496,29 @@
         }
       }
     },
+    "forgot.password.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introdueix un email i rebràs un link per resetear la teva contrasenya"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter the email address and receive a link to reset your password"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduce un email y recibirás un link para resetear tu password"
+          }
+        }
+      }
+    },
     "login.forgot.password" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -582,6 +628,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Todavía no estás registrado? Pulsa en el siguiente botón y ..."
+          }
+        }
+      }
+    },
+    "toast.email.reset.sent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email enviat! Comprova la bústia"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email sent! Check your inbox"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Email enviado! Comprueba tu buzón"
           }
         }
       }
