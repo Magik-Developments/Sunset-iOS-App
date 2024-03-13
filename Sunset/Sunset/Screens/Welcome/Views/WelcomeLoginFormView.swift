@@ -60,14 +60,8 @@ struct WelcomeLoginFormView: View {
                 }
 
                 if viewModel.isLoginForm {
-                    Button {
-                        viewModel.isLostYourPasswordSheetPresented.toggle()
-                    } label: {
-                        Text(String(localized: "login.forgot.password"))
-                            .sunsetFontSecondary(secondaryFont: .secondarySemiBold, secondarySize: .bodyM)
-                            .foregroundStyle(.neutralTextBody)
-                    }
-                    .padding(16)
+                    SunsetLostYourPasswordButton()
+                        .padding(.top, 16)
 
                     SunsetSignUpButton()
                 }
@@ -92,7 +86,7 @@ struct WelcomeLoginFormView: View {
             viewModel.successUserCreatedLabel()
         }
         .sheet(isPresented: $viewModel.isLostYourPasswordSheetPresented, content: {
-            
+
         })
     }
 }
@@ -161,6 +155,20 @@ struct SunsetSignUpButton: View {
             withAnimation {
                 viewModel.isLoginForm.toggle()
             }
+        }
+    }
+}
+
+struct SunsetLostYourPasswordButton: View {
+    @EnvironmentObject var viewModel: WelcomeViewModel
+
+    var body: some View {
+        Button {
+            viewModel.isLostYourPasswordSheetPresented.toggle()
+        } label: {
+            Text(String(localized: "login.forgot.password"))
+                .sunsetFontSecondary(secondaryFont: .secondarySemiBold, secondarySize: .bodyM)
+                .foregroundStyle(.neutralTextBody)
         }
     }
 }
