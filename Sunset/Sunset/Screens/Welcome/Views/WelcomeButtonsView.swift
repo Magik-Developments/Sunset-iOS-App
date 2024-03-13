@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WelcomeButtonsView : View {
     @Binding var isMailSheetPresented: Bool
+    @EnvironmentObject var viewModel: WelcomeViewModel
+    @Environment(SunsetAppViewModel.self) var appViewModel
 
     var body: some View {
         VStack {
@@ -25,6 +27,14 @@ struct WelcomeButtonsView : View {
                              imageResource: .googleIcon,
                              imageColor: .neutralBackgroundDefault) {
                     //TODO: Login Google
+                    viewModel.loginWithGoogle { isLoginSusccessful, user, error in
+                        guard error == nil else {return}
+                        if isLoginSusccessful {
+                            withAnimation {
+                                appViewModel.appState = .landing
+                            }
+                        } 
+                    }
                 }
                 DSIconButton(backgroundIconColor: .primaryBackgroundLogin,
                              imageResource: .appleLogo,

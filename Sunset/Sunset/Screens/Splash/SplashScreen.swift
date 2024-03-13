@@ -24,8 +24,8 @@ struct SplashScreen: View {
                 .task {
                     try? await Task.sleep(for: .seconds(1.5))
                     showProgressView = true
-                    viewModel.isUserLoggedIn()
                     try? await Task.sleep(for: .seconds(0.5))
+                    await viewModel.isUserLoggedIn()
                     showProgressView = false
                 }
             if showProgressView {

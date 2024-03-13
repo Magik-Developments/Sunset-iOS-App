@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WelcomeView: View {
     @EnvironmentObject var viewModel: WelcomeViewModel
+    @Environment(SunsetAppViewModel.self) var appViewModel
 
     var body: some View {
         ZStack {
@@ -29,7 +30,11 @@ struct WelcomeView: View {
                     .padding(.bottom, 48)
 
                 DSButton(title: "access.guest", buttonStyle: SunsetButtonStyles.secondaryWhite, size: .large) {
-                    //TODO: Access as a guest.
+//                    TODO: Acces as a guest, maybe uncomment code. 
+//                    appViewModel.user = nil
+//                    withAnimation {
+//                        appViewModel.appState = .landing
+//                    }
                 }
 
             }
