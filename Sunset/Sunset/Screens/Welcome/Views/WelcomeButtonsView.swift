@@ -29,6 +29,13 @@ struct WelcomeButtonsView : View {
                     //TODO: Login Google
                     viewModel.loginWithGoogle { isLoginSusccessful, user, error in
                         guard error == nil else {return}
+                        //TODO: See if user can be stored in this case. 
+//                        Task {
+//                            if try await viewModel.checkIfUserDontExistInFirestore() {
+//                                try await viewModel.storeUserFirestore()
+//                            }
+//                        }
+//                        
                         if isLoginSusccessful {
                             withAnimation {
                                 appViewModel.appState = .landing
