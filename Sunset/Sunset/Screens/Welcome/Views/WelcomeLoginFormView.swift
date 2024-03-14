@@ -37,6 +37,7 @@ struct WelcomeLoginFormView: View {
                                     let authResult = try await viewModel.createUser()
                                     guard let authResult else { return }
                                     //TODO: Navigate to email validation / landing.
+                                    appViewModel.sendVerificationEmail()
                                     viewModel.isUserCreatedToastPresented = true
                                     appViewModel.user = authResult.user
                                 }

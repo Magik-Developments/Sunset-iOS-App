@@ -15,15 +15,14 @@ final class SunsetAppViewModel {
     var user: User?
 
     func isUserLoggedIn() async {
-        Auth.auth().addStateDidChangeListener { auth, userFirebase in
+        Auth.auth().addStateDidChangeListener { [self] auth, userFirebase in
             if (userFirebase != nil) {
-                //user logged in
-                self.user = userFirebase
-                self.appState = .landing
+                user = userFirebase
+                appState = .landing
             } else {
                 //user not logged in
                 withAnimation(.smooth) {
-                    self.appState = .welcome
+                    appState = .welcome
                 }
             }
         }
@@ -38,6 +37,18 @@ final class SunsetAppViewModel {
             }
         } catch let signOutError as NSError {
             print(signOutError)
+        }
+    }
+
+    func sendVerificationEmail() {
+        guard let user = Auth.auth().currentUser else { return }
+
+        user.sendEmailVerification { error in
+            if let error = error {
+                print("Error sending verification email: \(error.localizedDescription)")
+            } else {
+                print("Verification email sent successfully.")
+            }
         }
     }
 

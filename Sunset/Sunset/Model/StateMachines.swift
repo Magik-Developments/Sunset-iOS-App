@@ -11,5 +11,6 @@ enum AppState {
     case splash
     case welcome
     case landing
+    case verificationEmail
 //    case noInternet //TODO: Create no internate case.
 }
