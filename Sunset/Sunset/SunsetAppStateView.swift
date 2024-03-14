@@ -20,6 +20,7 @@ struct SunsetAppStateView: View {
             case .splash: SplashScreen()
             case .welcome: WelcomeView().environmentObject(WelcomeViewModel())
             case .landing: LandingView().environmentObject(WelcomeViewModel())
+            case .verificationEmail: EmailVerificationView().environmentObject(EmailVerificationViewModel())
             }
         }
     }

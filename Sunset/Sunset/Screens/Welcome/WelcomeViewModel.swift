@@ -39,11 +39,6 @@ final class WelcomeViewModel: ObservableObject {
     @Published var isUserCreatedToastPresented: Bool = false
     @Published var isResetPasswordSentToastPresented: Bool = false
 
-    var toastOptions = SimpleToastOptions(
-        alignment: .bottom,
-        hideAfter: 4
-    )
-
     //MARK: - Alert variables.
     @Published var alertItem: AlertItem?
     @Published var textFieldInfoAlertIsPresented: Bool = false

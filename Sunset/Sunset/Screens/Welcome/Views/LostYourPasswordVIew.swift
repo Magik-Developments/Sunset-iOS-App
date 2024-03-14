@@ -10,6 +10,7 @@ import SimpleToast
 
 struct LostYourPasswordVIew: View {
     @EnvironmentObject var viewModel: WelcomeViewModel
+    @Environment(SunsetAppViewModel.self) var appViewModel
 
     var body: some View {
         VStack {
@@ -56,10 +57,10 @@ struct LostYourPasswordVIew: View {
 
         }
         .padding(.horizontal, 16)
-        .simpleToast(isPresented: $viewModel.isFieldsToastPresented, options: viewModel.toastOptions) {
+        .simpleToast(isPresented: $viewModel.isFieldsToastPresented, options: appViewModel.toastOptions) {
             viewModel.areFieldsValidLabel()
         }
-        .simpleToast(isPresented: $viewModel.isResetPasswordSentToastPresented, options: viewModel.toastOptions) {
+        .simpleToast(isPresented: $viewModel.isResetPasswordSentToastPresented, options: appViewModel.toastOptions) {
             viewModel.isEmailResetPasswordSent()
         }
     }

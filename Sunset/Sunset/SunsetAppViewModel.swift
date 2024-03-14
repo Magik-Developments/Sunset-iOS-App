@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import SimpleToast
 
 @Observable
 final class SunsetAppViewModel {
@@ -14,11 +15,25 @@ final class SunsetAppViewModel {
     var appState: AppState = .splash
     var user: User?
 
+    var toastOptions = SimpleToastOptions(
+        alignment: .bottom,
+        hideAfter: 4
+    )
+
+    //MARK: - User Actions
     func isUserLoggedIn() async {
         Auth.auth().addStateDidChangeListener { [self] auth, userFirebase in
             if (userFirebase != nil) {
                 user = userFirebase
-                appState = .landing
+                if user?.isEmailVerified ?? true {
+                    withAnimation(.smooth) {
+                        appState = .landing
+                    }
+                } else {
+                    withAnimation(.smooth) {
+                        appState = .verificationEmail
+                    }
+                }
             } else {
                 //user not logged in
                 withAnimation(.smooth) {

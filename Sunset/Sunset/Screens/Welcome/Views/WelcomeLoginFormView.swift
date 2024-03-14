@@ -36,7 +36,6 @@ struct WelcomeLoginFormView: View {
                                 Task {
                                     let authResult = try await viewModel.createUser()
                                     guard let authResult else { return }
-                                    //TODO: Navigate to email validation / landing.
                                     appViewModel.sendVerificationEmail()
                                     viewModel.isUserCreatedToastPresented = true
                                     appViewModel.user = authResult.user
@@ -77,13 +76,13 @@ struct WelcomeLoginFormView: View {
         } message: {
             viewModel.alertItem?.message
         }
-        .simpleToast(isPresented: $viewModel.isToggleToastPresented, options: viewModel.toastOptions) {
+        .simpleToast(isPresented: $viewModel.isToggleToastPresented, options: appViewModel.toastOptions) {
             viewModel.isToggleOnToastLabel()
         }
-        .simpleToast(isPresented: $viewModel.isFieldsToastPresented, options: viewModel.toastOptions) {
+        .simpleToast(isPresented: $viewModel.isFieldsToastPresented, options: appViewModel.toastOptions) {
             viewModel.areFieldsValidLabel()
         }
-        .simpleToast(isPresented: $viewModel.isUserCreatedToastPresented, options: viewModel.toastOptions) {
+        .simpleToast(isPresented: $viewModel.isUserCreatedToastPresented, options: appViewModel.toastOptions) {
             viewModel.successUserCreatedLabel()
         }
         .sheet(isPresented: $viewModel.isLostYourPasswordSheetPresented, content: {
