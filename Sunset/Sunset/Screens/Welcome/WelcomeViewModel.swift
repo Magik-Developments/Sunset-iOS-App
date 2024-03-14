@@ -98,6 +98,18 @@ final class WelcomeViewModel: ObservableObject {
         try await userRef.setData(userData)
     }
 
+    func checkIfUserDontExistInFirestore() async throws -> Bool {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return false
+        }
+
+        let usersCollection = Firestore.firestore().collection("users")
+
+        let querySnapshot = try await usersCollection.whereField("uid", isEqualTo: uid).getDocuments()
+
+        return querySnapshot.documents.isEmpty
+    }
+
 
     fileprivate func getFilePathForDefaultImage() -> String {
         "profile_images/default_images/\(String(describing: username.first!.lowercased())).png"
