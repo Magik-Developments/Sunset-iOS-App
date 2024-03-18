@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct CounterButton: View {
+    @Environment(SunsetAppViewModel.self) var appViewModel
+    @EnvironmentObject var viewModel: EmailVerificationViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            appViewModel.sendVerificationEmail()
+            viewModel.isVerificationEmailSentToastPresented.toggle()
+            viewModel.startTimer()
+        }, label: {
+            Text(viewModel.getCounterText())
+                .sunsetFontPrimary(primaryFont: .primaryMedium, primarySize: .headlineXS)
+                .tint(.primaryBackgroundDefault)
+        })
+        .disabled(!viewModel.isResendActive)
     }
 }
 
 #Preview {
-    CounterButton()
+    CounterButton().environmentObject(EmailVerificationViewModel()).environment(SunsetAppViewModel())
 }

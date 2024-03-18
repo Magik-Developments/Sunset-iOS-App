@@ -18,14 +18,13 @@ final class EmailVerificationViewModel: ObservableObject {
 
     func startTimer() {
         timer?.invalidate()
-        isResendActive = false
         counter = 30
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if self.counter > 0 {
-                self.counter -= 1
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [self] _ in
+            if counter > 0 {
+                counter -= 1
             } else {
-                self.timer?.invalidate()
-                self.isResendActive = true
+                timer?.invalidate()
+                isResendActive = true
             }
         }
     }

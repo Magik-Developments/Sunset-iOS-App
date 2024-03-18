@@ -57,16 +57,7 @@ struct EmailVerificationView: View {
 
                 Spacer()
 
-                Button(action: {
-                    appViewModel.sendVerificationEmail()
-                    viewModel.isVerificationEmailSentToastPresented.toggle()
-                    viewModel.startTimer()
-                }, label: {
-                    Text(viewModel.getCounterText())
-                        .sunsetFontPrimary(primaryFont: .primaryMedium, primarySize: .headlineXS)
-                        .tint(.primaryBackgroundDefault)
-                })
-                .disabled(!viewModel.isResendActive)
+                CounterButton()
             }
             .padding(.horizontal, 8)
 
@@ -77,6 +68,9 @@ struct EmailVerificationView: View {
         .onAppear {
             viewModel.startTimer()
         }
+        .onChange(of: viewModel.counter, { oldValue, newValue in
+            print(newValue)
+        })
         .simpleToast(isPresented: $viewModel.isVerificationEmailSentToastPresented, options: appViewModel.toastOptions) {
             viewModel.isResendToastLabel()
         }
@@ -84,5 +78,5 @@ struct EmailVerificationView: View {
 }
 
 #Preview {
-    EmailVerificationView()
+    EmailVerificationView().environmentObject(EmailVerificationViewModel()).environment(SunsetAppViewModel())
 }
