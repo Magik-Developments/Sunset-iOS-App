@@ -29,7 +29,24 @@ struct WelcomeLoginFormView: View {
                          size: .large) {
 
                     if viewModel.isLoginForm {
-                        //TODO: Validate email and password. and do login.
+                        if viewModel.areLoginFieldsValid() {
+                            viewModel.loginWithEmail { isLoginSuccessful, user in
+                                if isLoginSuccessful {
+                                    viewModel.isUserLoginToastPresented = true
+                                    guard let user else { return }
+                                    appViewModel.user = user
+                                    if user.isEmailVerified {
+                                        appViewModel.appState = .landing
+                                    } else {
+                                        appViewModel.appState = .verificationEmail
+                                    }
+                                } else {
+                                    viewModel.isUserLoginErrorToastPresented = true
+                                }
+                            }
+                        } else {
+                            viewModel.isFieldsToastPresented = true
+                        }
                     } else {
                         if viewModel.areSignUpFieldsValid() {
                             if viewModel.isToggleOn {
@@ -84,6 +101,12 @@ struct WelcomeLoginFormView: View {
         }
         .simpleToast(isPresented: $viewModel.isUserCreatedToastPresented, options: appViewModel.toastOptions) {
             viewModel.successUserCreatedLabel()
+        }
+        .simpleToast(isPresented: $viewModel.isUserLoginToastPresented, options: appViewModel.toastOptions) {
+            viewModel.successLoginUserLabel()
+        }
+        .simpleToast(isPresented: $viewModel.isUserLoginErrorToastPresented, options: appViewModel.toastOptions) {
+            viewModel.failUserLoginUserLabel()
         }
         .sheet(isPresented: $viewModel.isLostYourPasswordSheetPresented, content: {
             LostYourPasswordVIew()
