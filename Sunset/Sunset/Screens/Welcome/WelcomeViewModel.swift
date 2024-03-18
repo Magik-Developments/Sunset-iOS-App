@@ -13,6 +13,12 @@ import SimpleToast
 import FirebaseStorage
 import GoogleSignIn
 
+enum FirestoreProvider: String {
+    case firebase = "firebase"
+    case google = "google"
+    case apple = "apple"
+}
+
 @MainActor
 final class WelcomeViewModel: ObservableObject {
     
@@ -65,7 +71,7 @@ final class WelcomeViewModel: ObservableObject {
     func createUser() async throws -> AuthDataResult? {
         do {
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-            try await storeUserFirestore()
+            try await storeUserFirestore(provider: .firebase)
             return authResult
         } catch {
             alertItem = AlertContext.customError(title: "error.title", message: "firebase.error.common")
@@ -74,7 +80,7 @@ final class WelcomeViewModel: ObservableObject {
         return nil
     }
 
-    func storeUserFirestore() async throws {
+    func storeUserFirestore(provider: FirestoreProvider) async throws {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E MMM dd HH:mm:ss 'GMT'Z yyyy"
         let dateString = dateFormatter.string(from: Date())
@@ -86,7 +92,7 @@ final class WelcomeViewModel: ObservableObject {
             "creation_date": dateString,
             "email": email,
             "image": imageURL,
-            "provider": "firebase",
+            "provider": provider.rawValue,
             "username": username
         ]
 
