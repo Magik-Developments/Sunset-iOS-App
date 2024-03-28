@@ -30,11 +30,10 @@ struct WelcomeView: View {
                     .padding(.bottom, 48)
 
                 DSButton(title: "access.guest", buttonStyle: SunsetButtonStyles.secondaryWhite, size: .large) {
-//                    TODO: Acces as a guest, maybe uncomment code. 
-//                    appViewModel.user = nil
-//                    withAnimation {
-//                        appViewModel.appState = .landing
-//                    }
+                    appViewModel.user = nil
+                    withAnimation {
+                        appViewModel.appState = .landing
+                    }
                 }
 
             }

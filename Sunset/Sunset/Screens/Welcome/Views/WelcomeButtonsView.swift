@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SimpleToast
 
 struct WelcomeButtonsView : View {
     @Binding var isMailSheetPresented: Bool
@@ -26,16 +27,14 @@ struct WelcomeButtonsView : View {
                 DSIconButton(backgroundIconColor: .primaryBackgroundLogin,
                              imageResource: .googleIcon,
                              imageColor: .neutralBackgroundDefault) {
-                    //TODO: Login Google
                     viewModel.loginWithGoogle { isLoginSusccessful, user, error in
                         guard error == nil else {return}
-                        //TODO: See if user can be stored in this case. 
-//                        Task {
-//                            if try await viewModel.checkIfUserDontExistInFirestore() {
-//                                try await viewModel.storeUserFirestore()
-//                            }
-//                        }
-//                        
+                        Task {
+                            if try await viewModel.checkIfUserDontExistInFirestore() {
+                                try await viewModel.storeUserFirestore(provider: .google)
+                            }
+                        }
+                        
                         if isLoginSusccessful {
                             withAnimation {
                                 appViewModel.appState = .landing

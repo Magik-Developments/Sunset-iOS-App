@@ -13,6 +13,12 @@ import SimpleToast
 import FirebaseStorage
 import GoogleSignIn
 
+enum FirestoreProvider: String {
+    case firebase = "firebase"
+    case google = "google"
+    case apple = "apple"
+}
+
 @MainActor
 final class WelcomeViewModel: ObservableObject {
     
@@ -38,6 +44,8 @@ final class WelcomeViewModel: ObservableObject {
     @Published var isFieldsToastPresented: Bool = false
     @Published var isUserCreatedToastPresented: Bool = false
     @Published var isResetPasswordSentToastPresented: Bool = false
+    @Published var isUserLoginToastPresented: Bool = false
+    @Published var isUserLoginErrorToastPresented: Bool = false
 
     //MARK: - Alert variables.
     @Published var alertItem: AlertItem?
@@ -65,7 +73,7 @@ final class WelcomeViewModel: ObservableObject {
     func createUser() async throws -> AuthDataResult? {
         do {
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-            try await storeUserFirestore()
+            try await storeUserFirestore(provider: .firebase)
             return authResult
         } catch {
             alertItem = AlertContext.customError(title: "error.title", message: "firebase.error.common")
@@ -74,7 +82,7 @@ final class WelcomeViewModel: ObservableObject {
         return nil
     }
 
-    func storeUserFirestore() async throws {
+    func storeUserFirestore(provider: FirestoreProvider) async throws {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E MMM dd HH:mm:ss 'GMT'Z yyyy"
         let dateString = dateFormatter.string(from: Date())
@@ -86,7 +94,7 @@ final class WelcomeViewModel: ObservableObject {
             "creation_date": dateString,
             "email": email,
             "image": imageURL,
-            "provider": "firebase",
+            "provider": provider.rawValue,
             "username": username
         ]
 
@@ -105,7 +113,6 @@ final class WelcomeViewModel: ObservableObject {
         return querySnapshot.documents.isEmpty
     }
 
-
     fileprivate func getFilePathForDefaultImage() -> String {
         "profile_images/default_images/\(String(describing: username.first!.lowercased())).png"
     }
@@ -123,6 +130,21 @@ final class WelcomeViewModel: ObservableObject {
         }
     }
 
+    //MARK: - Login via email
+    func areLoginFieldsValid() -> Bool {
+        guard let isEmailValid, let isPasswordValid else { return false }
+        return isEmailValid && isPasswordValid
+    }
+    
+    func loginWithEmail(completion: @escaping(Bool, User?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error {
+                completion(false, nil)
+            } else if let result {
+                completion(true, result.user)
+            }
+        }
+    }
     //MARK: - Google SSO
     func loginWithGoogle(completion: @escaping (Bool, User?, Error?) -> Void) {
         var isLoginSuccessful = false
@@ -199,6 +221,26 @@ final class WelcomeViewModel: ObservableObject {
             .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
             .padding()
             .background(.successBackgroundDefault)
+            .foregroundStyle(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 32))
+            .padding(.top)
+    }
+
+    func successLoginUserLabel() -> some View {
+        Label("toast.login.user.success", systemImage: "person.text.rectangle")
+            .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
+            .padding()
+            .background(.successBackgroundDefault)
+            .foregroundStyle(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 32))
+            .padding(.top)
+    }
+
+    func failUserLoginUserLabel() -> some View {
+        Label("toast.login.user.fail", systemImage: "person.fill.xmark")
+            .sunsetFontSecondary(secondaryFont: .secondaryRegular, secondarySize: .bodyM)
+            .padding()
+            .background(.red)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: 32))
             .padding(.top)

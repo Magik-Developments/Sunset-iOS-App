@@ -728,6 +728,52 @@
         }
       }
     },
+    "toast.login.user.fail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login ha fallat, siusplau comprova les dades"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login failed, please check your data"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login ha fallado, comprueba los datos"
+          }
+        }
+      }
+    },
+    "toast.login.user.success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login exitós!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login successful!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Login Exitoso!"
+          }
+        }
+      }
+    },
     "toast.toggle.on" : {
       "localizations" : {
         "ca" : {
