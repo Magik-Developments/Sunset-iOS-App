@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct LandingView: View {
-    //TODO: Implement landing
     @Environment(SunsetAppViewModel.self) var appViewModel
 
     var body: some View {
-        Button{
-            appViewModel.logOutUser()
-        }label: {
-            Text("Log Out").padding(8)
+        TabView {
+            HomeView().tabItem { Label(String(localized: "tabitem.home"), systemImage: "house.fill") }
+            SunsetQualityView().tabItem { Label(String(localized:"tabitem.sunset.quality"), systemImage: "sun.haze.fill") }
+            SpotsMapView().tabItem { Label(String(localized:"tabitem.spots.map"), systemImage: "mappin.and.ellipse") }
+            ProfileView().tabItem { Label(String(localized:"tabitem.profile"), systemImage: "figure.wave.circle.fill") }
         }
-        .buttonStyle(.borderedProminent)
+        .tint(.primaryBackgroundDefault)
     }
 }
 
-#Preview {
-    LandingView()
-}
