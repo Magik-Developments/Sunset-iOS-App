@@ -31,7 +31,7 @@ struct WelcomeButtonsView : View {
                         guard error == nil else {return}
                         Task {
                             if try await viewModel.checkIfUserDontExistInFirestore() {
-                                try await viewModel.storeUserFirestore(provider: .google)
+                                try await viewModel.storeUserFirestore(provider: .google, user: user)
                             }
                         }
                         

@@ -701,6 +701,12 @@
             "value" : "Perfil"
           }
         },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",

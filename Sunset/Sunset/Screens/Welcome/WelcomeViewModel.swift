@@ -82,18 +82,21 @@ final class WelcomeViewModel: ObservableObject {
         return nil
     }
 
-    func storeUserFirestore(provider: FirestoreProvider) async throws {
+    func storeUserFirestore(provider: FirestoreProvider, user: User? = nil) async throws {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E MMM dd HH:mm:ss 'GMT'Z yyyy"
         let dateString = dateFormatter.string(from: Date())
 
         let db = Firestore.firestore()
+        if let user, let email = user.email, let emailAlias  = email.split(separator: "@").first {
+            username = String(emailAlias)
+        }
         let userRef = db.collection("users").document(username.lowercased())
-        let imageURL = try await getDefaultImageURL()
+        let defaultImage = try await getDefaultImageURL()
         let userData: [String: String] = [
             "creation_date": dateString,
             "email": email,
-            "image": imageURL,
+            "image": user?.photoURL?.absoluteString ?? defaultImage,
             "provider": provider.rawValue,
             "username": username
         ]
